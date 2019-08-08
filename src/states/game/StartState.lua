@@ -70,8 +70,6 @@ function StartState:render()
     love.graphics.clear(188, 188, 188, 255)
 
     love.graphics.setColor(24, 24, 24, 255)
-    love.graphics.setFont(gFonts['small'])
-    love.graphics.printf(self.player, 0, VIRTUAL_HEIGHT / 2 - 96, VIRTUAL_WIDTH, 'center')
     love.graphics.setFont(gFonts['large'])
     love.graphics.printf('50-Mon!', 0, VIRTUAL_HEIGHT / 2 - 72, VIRTUAL_WIDTH, 'center')
     love.graphics.setFont(gFonts['medium'])
