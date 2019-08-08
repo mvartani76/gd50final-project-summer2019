@@ -14,6 +14,8 @@ function StartState:init()
     self.sprite = POKEMON_DEFS[POKEMON_IDS[math.random(#POKEMON_IDS)]].battleSpriteFront
     self.spriteX = VIRTUAL_WIDTH / 2 - 32
     self.spriteY = VIRTUAL_HEIGHT / 2 - 16
+    self.player = 'male_player'
+    self.openingText = "Welcome to the world of 50Mon Strong Man! "
 
     self.tween = Timer.every(3, function()
         Timer.tween(0.2, {
@@ -50,9 +52,9 @@ function StartState:update(dt)
             gStateStack:pop()
             
             -- Use default male player is user decides not to choose player type
-            gStateStack:push(PlayState('male_player'))
+            gStateStack:push(PlayState(self.player))
             gStateStack:push(DialogueState("" .. 
-                "Welcome to the world of 50Mon! To start fighting monsters with your own randomly assigned" ..
+                tostring(self.openingText) .. "To start fighting monsters with your own randomly assigned" ..
                 " monster, just walk in the tall grass! If you need to heal, just press 'P' in the field! " ..
                 "Good luck! (Press Enter to dismiss dialogues)"
             ))
@@ -68,6 +70,8 @@ function StartState:render()
     love.graphics.clear(188, 188, 188, 255)
 
     love.graphics.setColor(24, 24, 24, 255)
+    love.graphics.setFont(gFonts['small'])
+    love.graphics.printf(self.player, 0, VIRTUAL_HEIGHT / 2 - 96, VIRTUAL_WIDTH, 'center')
     love.graphics.setFont(gFonts['large'])
     love.graphics.printf('50-Mon!', 0, VIRTUAL_HEIGHT / 2 - 72, VIRTUAL_WIDTH, 'center')
     love.graphics.setFont(gFonts['medium'])
