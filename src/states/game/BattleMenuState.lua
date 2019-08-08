@@ -33,34 +33,49 @@ function BattleMenuState:init(battleState)
                     -- pop battle menu
                     gStateStack:pop()
 
-                    -- show a message saying they successfully ran, then fade in
-                    -- and out back to the field automatically
-                    gStateStack:push(BattleMessageState('You fled successfully!',
-                        function() end), false)
-                    Timer.after(0.5, function()
-                        gStateStack:push(FadeInState({
-                            r = 255, g = 255, b = 255
-                        }, 1,
-                        
-                        -- pop message and battle state and add a fade to blend in the field
+                    diffLevel = self.battleState.player.playerLevel - self.battleState.opponentLevel
+
+                    -- If the opponent has a higher level, the player cannot flee
+                    if diffLevel < 0 then
+                        gStateStack:push(BattleMessageState('You Cannot Flee as you have a lower level than your opponent... Sorry!',
                         function()
-
-                            -- resume field music
-                            gSounds['field-music']:play()
-
-                            -- pop message state
-                            gStateStack:pop()
-
-                            -- pop battle state
-                            gStateStack:pop()
-
-                            gStateStack:push(FadeOutState({
+                            gStateStack:push(TakeTurnState(self.battleState))
+                        end), true)
+                    elseif (math.random(diffLevel+1) ~= 1) then
+                        gStateStack:push(BattleMessageState('You failed to flee!',
+                        function()
+                            gStateStack:push(TakeTurnState(self.battleState))
+                        end), true)
+                    else
+                        -- show a message saying they successfully ran, then fade in
+                        -- and out back to the field automatically
+                        gStateStack:push(BattleMessageState('You fled successfully!',
+                            function() end), false)
+                        Timer.after(0.5, function()
+                            gStateStack:push(FadeInState({
                                 r = 255, g = 255, b = 255
-                            }, 1, function()
-                                -- do nothing after fade out ends
+                            }, 1,
+                            
+                            -- pop message and battle state and add a fade to blend in the field
+                            function()
+
+                                -- resume field music
+                                gSounds['field-music']:play()
+
+                                -- pop message state
+                                gStateStack:pop()
+
+                                -- pop battle state
+                                gStateStack:pop()
+
+                                gStateStack:push(FadeOutState({
+                                    r = 255, g = 255, b = 255
+                                }, 1, function()
+                                    -- do nothing after fade out ends
+                                end))
                             end))
-                        end))
-                    end)
+                        end)
+                    end
                 end
             }
         }
