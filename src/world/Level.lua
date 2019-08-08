@@ -8,7 +8,7 @@
 
 Level = Class{}
 
-function Level:init()
+function Level:init(def)
     self.tileWidth = 50
     self.tileHeight = 50
 
@@ -19,7 +19,7 @@ function Level:init()
     self:createMaps()
 
     self.player = Player {
-        animations = ENTITY_DEFS['player'].animations,
+        animations = ENTITY_DEFS[def.player].animations,
         mapX = 10,
         mapY = 10,
         width = 16,
