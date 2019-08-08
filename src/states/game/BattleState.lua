@@ -15,10 +15,13 @@ function BattleState:init(player)
     -- flag for when the battle can take input, set in the first update call
     self.battleStarted = false
 
+    -- store the opponent level to use when determining ability to flee
+    self.opponentLevel = math.random(2, 6)
+
     self.opponent = Opponent {
         party = Party {
             pokemon = {
-                Pokemon(Pokemon.getRandomDef(), math.random(2, 6))
+                Pokemon(Pokemon.getRandomDef(), self.opponentLevel)
             }
         }
     }
