@@ -32,7 +32,30 @@ function StartState:init()
 end
 
 function StartState:update(dt)
-    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
+    if love.keyboard.wasPressed('c') or love.keyboard.wasPressed('C') then
+        --gStateStack:push(FadeInState({
+        --    r = 255, g = 255, b = 255
+        --}, 1,
+        --function()
+            gStateStack:push(ChoosePlayerMenuState(self))
+            gStateStack:push(ChoosePlayerMessageState('Please choose a player type...',
+            function()
+            end))
+                --gStateStack:push(FadeOutState({
+                --r = 255, g = 255, b = 255
+                --}, 1,
+                --function() end))
+            --end))
+        --end))
+
+
+        
+            gStateStack:push(FadeOutState({
+                r = 255, g = 255, b = 255
+            }, 1,
+            function() end))
+
+    elseif love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then
         gStateStack:push(FadeInState({
             r = 255, g = 255, b = 255
         }, 1,
@@ -42,7 +65,8 @@ function StartState:update(dt)
 
             gStateStack:pop()
             
-            gStateStack:push(PlayState())
+            -- Use default male player is user decides not to choose player type
+            gStateStack:push(PlayState('male_player'))
             gStateStack:push(DialogueState("" .. 
                 "Welcome to the world of 50Mon! To start fighting monsters with your own randomly assigned" ..
                 " monster, just walk in the tall grass! If you need to heal, just press 'P' in the field! " ..

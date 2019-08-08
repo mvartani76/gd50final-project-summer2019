@@ -8,8 +8,8 @@
 
 PlayState = Class{__includes = BaseState}
 
-function PlayState:init()
-    self.level = Level()
+function PlayState:init(player)
+    self.level = Level { player = player}
 
     gSounds['field-music']:setLooping(true)
     gSounds['field-music']:play()
