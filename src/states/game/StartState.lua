@@ -56,8 +56,9 @@ function StartState:update(dt)
             gStateStack:push(DialogueState("" .. 
                 tostring(self.openingText) .. "To start fighting monsters with your own randomly assigned" ..
                 " monster, just walk in the tall grass! If you need to heal, you will need some healing flowers." ..
-                " If you have some healing flowers, just press 'P' in the field! Good luck! (Press Enter to dismiss dialogues)"
-            ))
+                " If you have some healing flowers, just press 'P' in the field! To see your stats, press 'S' anywhere" ..
+                " in the board. Good luck! (Press Enter to dismiss dialogues)"
+            , DEFAULT_DIALOGBOX_WIDTH, TALL_DIALOGBOX_HEIGHT, 5))
             gStateStack:push(FadeOutState({
                 r = 255, g = 255, b = 255
             }, 1,

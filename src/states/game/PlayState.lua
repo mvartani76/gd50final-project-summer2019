@@ -29,14 +29,14 @@ function PlayState:update(dt)
 
             -- show a dialogue for it, allowing us to do so again when closed
             gStateStack:push(DialogueState('Your Pokemon has been healed! You have ' .. tostring(self.level.player.healingFlowers) ..
-                ' left for healing.', 64,
+                ' left for healing.', DEFAULT_DIALOGBOX_WIDTH, DEFAULT_DIALOGBOX_HEIGHT, 4,
 
             function()
                 self.dialogueOpened = false
             end))
         else
             -- show a dialogue alerting the user that there are no healing flowers left
-            gStateStack:push(DialogueState('You do not have any healing flowers to heal your Pokemon!', 64,
+            gStateStack:push(DialogueState('You do not have any healing flowers to heal your Pokemon!', DEFAULT_DIALOGBOX_WIDTH, DEFAULT_DIALOGBOX_HEIGHT, 4,
         
             function()
                 self.dialogueOpened = false
@@ -47,7 +47,7 @@ function PlayState:update(dt)
         gStateStack:push(DialogueState('Here are your stats:\n' ..
             'Level: ' .. tostring(self.level.player.playerLevel) .. '\n' ..
             'Experience: ' .. tostring(self.level.player.party.pokemon[1].currentExp) .. '\n' ..
-            'Healing Flowers: ' .. tostring(self.level.player.healingFlowers), 64,
+            'Healing Flowers: ' .. tostring(self.level.player.healingFlowers), STATS_DIALOGBOX_WIDTH, DEFAULT_DIALOGBOX_HEIGHT, 4,
         
             function()
                 self.dialogueOpened = false
