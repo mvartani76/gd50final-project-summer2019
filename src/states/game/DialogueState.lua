@@ -8,8 +8,8 @@
 
 DialogueState = Class{__includes = BaseState}
 
-function DialogueState:init(text, callback)
-    self.textbox = Textbox(6, 6, VIRTUAL_WIDTH - 12, 64, text, gFonts['small'], 3)
+function DialogueState:init(text, height, callback)
+    self.textbox = Textbox(6, 6, VIRTUAL_WIDTH - 12, height, text, gFonts['small'], 4)
     self.callback = callback or function() end
 end
 
