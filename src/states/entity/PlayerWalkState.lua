@@ -16,6 +16,9 @@ end
 function PlayerWalkState:enter()
     self:checkForEncounter()
 
+    -- Check to see if the player has run into any items
+    self:checkForItem()
+
     if not self.encounterFound then
         self:attemptMove()
     end
@@ -55,5 +58,34 @@ function PlayerWalkState:checkForEncounter()
         self.encounterFound = true
     else
         self.encounterFound = false
+    end
+end
+
+-- Method to check and see if the player has run into any items
+-- If the player has, convert the tile back to tall-grass, play a powerup sound, and give the player some exp
+function PlayerWalkState:checkForItem()
+    local x, y = self.entity.mapX, self.entity.mapY
+
+    if self.level.grassLayer.tiles[y][x].id == TILE_IDS['tall-grass-flower'] then
+
+        self.level.grassLayer.tiles[y][x].id = TILE_IDS['tall-grass']
+
+        gSounds['powerup']:play()
+
+        -- add exp points based on the player level
+        self.entity.party.pokemon[1].currentExp = self.entity.party.pokemon[1].currentExp + math.random(self.entity.playerLevel*2,self.entity.playerLevel*3)
+
+        -- level up if we've gone over the needed amount
+        if self.entity.party.pokemon[1].currentExp > self.entity.party.pokemon[1].expToLevel then
+            gSounds['levelup']:play()
+
+            -- set our exp to whatever the overlap is
+            self.entity.party.pokemon[1].currentExp = self.entity.party.pokemon[1].currentExp - self.entity.party.pokemon[1].expToLevel
+            self.entity.party.pokemon[1]:levelUp()
+        end
+
+        self.itemFound = true
+    else
+        self.itemFound = false
     end
 end
