@@ -19,17 +19,29 @@ end
 
 function PlayState:update(dt)
     if not self.dialogueOpened and love.keyboard.wasPressed('p') then
+        if self.level.player.healingFlowers > 0 then
+            -- heal player pokemon
+            gSounds['heal']:play()
+            self.level.player.party.pokemon[1].currentHP = self.level.player.party.pokemon[1].HP
+
+            -- Subtract one of the healing flowers as it is being used
+            self.level.player.healingFlowers = self.level.player.healingFlowers - 1
+
+            -- show a dialogue for it, allowing us to do so again when closed
+            gStateStack:push(DialogueState('Your Pokemon has been healed! You have ' .. tostring(self.level.player.healingFlowers) ..
+                ' left for healing.',
+
+            function()
+                self.dialogueOpened = false
+            end))
+        else
+            -- show a dialogue alerting the user that there are no healing flowers left
+            gStateStack:push(DialogueState('You do not have any healing flowers to heal your Pokemon!',
         
-        -- heal player pokemon
-        gSounds['heal']:play()
-        self.level.player.party.pokemon[1].currentHP = self.level.player.party.pokemon[1].HP
-        
-        -- show a dialogue for it, allowing us to do so again when closed
-        gStateStack:push(DialogueState('Your Pokemon has been healed!',
-    
-        function()
-            self.dialogueOpened = false
-        end))
+            function()
+                self.dialogueOpened = false
+            end))
+        end
     end
 
     self.level:update(dt)

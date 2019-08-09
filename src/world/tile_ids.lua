@@ -11,5 +11,6 @@ TILE_IDS = {
     ['empty'] = 101,
     ['tall-grass'] = 42,
     ['half-tall-grass'] = 50,
-    ['tall-grass-flower'] = 41
+    ['tall-grass-flower'] = 41,
+    ['healing-flowers'] = {32, 40, 48}
 }

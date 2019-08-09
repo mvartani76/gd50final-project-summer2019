@@ -85,6 +85,13 @@ function PlayerWalkState:checkForItem()
         end
 
         self.itemFound = true
+    elseif (self.level.baseLayer.tiles[y][x].id == TILE_IDS['healing-flowers'][1]) or (self.level.baseLayer.tiles[y][x].id == TILE_IDS['healing-flowers'][2]) or (self.level.baseLayer.tiles[y][x].id == TILE_IDS['healing-flowers'][3]) then
+        -- replace the healing flower with some random grass as the healing flower was picked up
+        self.level.baseLayer.tiles[y][x].id = TILE_IDS['grass'][math.random(#TILE_IDS['grass'])]
+        -- increment the number of healingFlowers the player has
+        self.entity.healingFlowers = self.entity.healingFlowers + 1
+        gSounds['health']:play()
+        self.itemFound = true
     else
         self.itemFound = false
     end

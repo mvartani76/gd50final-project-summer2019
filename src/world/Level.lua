@@ -40,7 +40,9 @@ function Level:createMaps()
         table.insert(self.baseLayer.tiles, {})
 
         for x = 1, self.tileWidth do
-            local id = TILE_IDS['grass'][math.random(#TILE_IDS['grass'])]
+            -- randomly add healing flowers to the grassy area. Player can only heal with one of these flowers
+            local healing_flower = TILE_IDS['healing-flowers'][math.random(#TILE_IDS['healing-flowers'])]
+            local id = math.random(10) == 1 and healing_flower or TILE_IDS['grass'][math.random(#TILE_IDS['grass'])]
 
             table.insert(self.baseLayer.tiles[y], Tile(x, y, id))
         end

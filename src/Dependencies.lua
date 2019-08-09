@@ -92,6 +92,7 @@ gSounds = {
     ['hit'] = love.audio.newSource('sounds/hit.wav'),
     ['run'] = love.audio.newSource('sounds/run.wav'),
     ['heal'] = love.audio.newSource('sounds/heal.wav'),
+    ['health'] = love.audio.newSource('sounds/health.wav'),
     ['exp'] = love.audio.newSource('sounds/exp.wav'),
     ['levelup'] = love.audio.newSource('sounds/levelup.wav'),
     ['victory-music'] = love.audio.newSource('sounds/victory.wav'),
