@@ -43,6 +43,16 @@ function PlayState:update(dt)
             end))
         end
     end
+    if not self.dialgueOpened and love.keyboard.wasPressed('s') then
+        gStateStack:push(DialogueState('Here are your stats:\n' ..
+            'Level: ' .. tostring(self.level.player.playerLevel) .. '\n' ..
+            'Experience: ' .. tostring(self.level.player.party.pokemon[1].currentExp) .. '\n' ..
+            'Healing Flowers: ' .. tostring(self.level.player.healingFlowers), 64,
+        
+            function()
+                self.dialogueOpened = false
+            end))
+    end
 
     self.level:update(dt)
 end
