@@ -52,7 +52,9 @@ function Level:createMaps()
         table.insert(self.halfGrassLayer.tiles, {})
 
         for x = 1, self.tileWidth do
-            local id = y > 10 and TILE_IDS['tall-grass'] or TILE_IDS['empty']
+            -- randomly add some flowers into the map
+            local grass_or_flower = math.random(10) == 1 and TILE_IDS['tall-grass-flower'] or TILE_IDS['tall-grass']
+            local id = y > 10 and grass_or_flower or TILE_IDS['empty']
 
             table.insert(self.grassLayer.tiles[y], Tile(x, y, id))
         end
