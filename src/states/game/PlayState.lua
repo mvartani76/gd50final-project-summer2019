@@ -29,14 +29,14 @@ function PlayState:update(dt)
 
             -- show a dialogue for it, allowing us to do so again when closed
             gStateStack:push(DialogueState('Your Pokemon has been healed! You have ' .. tostring(self.level.player.healingFlowers) ..
-                ' left for healing.',
+                ' left for healing.', 64,
 
             function()
                 self.dialogueOpened = false
             end))
         else
             -- show a dialogue alerting the user that there are no healing flowers left
-            gStateStack:push(DialogueState('You do not have any healing flowers to heal your Pokemon!',
+            gStateStack:push(DialogueState('You do not have any healing flowers to heal your Pokemon!', 64,
         
             function()
                 self.dialogueOpened = false
