@@ -55,8 +55,8 @@ function StartState:update(dt)
             gStateStack:push(PlayState(self.player))
             gStateStack:push(DialogueState("" .. 
                 tostring(self.openingText) .. "To start fighting monsters with your own randomly assigned" ..
-                " monster, just walk in the tall grass! If you need to heal, just press 'P' in the field! " ..
-                "Good luck! (Press Enter to dismiss dialogues)"
+                " monster, just walk in the tall grass! If you need to heal, you will need some healing flowers." ..
+                " If you have some healing flowers, just press 'P' in the field! Good luck! (Press Enter to dismiss dialogues)"
             ))
             gStateStack:push(FadeOutState({
                 r = 255, g = 255, b = 255
