@@ -47,7 +47,8 @@ function PlayState:update(dt)
         gStateStack:push(DialogueState('Here are your stats:\n' ..
             'Level: ' .. tostring(self.level.player.playerLevel) .. '\n' ..
             'Experience: ' .. tostring(self.level.player.party.pokemon[1].currentExp) .. '\n' ..
-            'Healing Flowers: ' .. tostring(self.level.player.healingFlowers), STATS_DIALOGBOX_WIDTH, DEFAULT_DIALOGBOX_HEIGHT, 4,
+            'Current HP: ' .. tostring(self.level.player.party.pokemon[1].currentHP) .. '\n' ..
+            'Healing Flowers: ' .. tostring(self.level.player.healingFlowers), STATS_DIALOGBOX_WIDTH, TALL_DIALOGBOX_HEIGHT, 5,
         
             function()
                 self.dialogueOpened = false
